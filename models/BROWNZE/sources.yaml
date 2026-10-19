@@ -1,0 +1,173 @@
+version: 2
+
+sources:
+  - name: retail_stg
+    description: "Staging layer of the retail analytics database in Snowflake"
+    database: retail_analytics_db
+    schema: STG
+
+    tables:
+      - name: categories
+        # identifier: CATEGORIES
+        # description: "Product categories"
+        # columns:
+        #   - name: category_id
+        #     description: "Primary key"
+        #     data_tests:
+        #       - unique
+        #       - not_null
+        #   - name: category_name
+        #     data_tests:
+        #       - not_null
+        #       - dbt_utils.not_empty_string
+
+      - name: customers
+        # identifier: CUSTOMERS
+        # description: "Customer master data"
+        # columns:
+        #   - name: customer_id
+        #     description: "Primary key"
+        #     data_tests:
+        #       - unique
+        #       - not_null
+        #   - name: email
+        #     data_tests:
+        #       - unique
+        #       - not_null
+        #   - name: city
+        #     data_tests:
+        #       - dbt_utils.not_constant
+        #   - name: phone
+        #     data_tests:
+        #       - dbt_utils.not_null_proportion:
+        #           at_least: 0.85
+
+      - name: products
+        # identifier: PRODUCTS
+        # description: "Product catalog"
+        # data_tests:
+        #   - dbt_utils.expression_is_true:
+        #       expression: "price >= cost_price"
+        # columns:
+        #   - name: product_id
+        #     description: "Primary key"
+        #     data_tests:
+        #       - unique
+        #       - not_null
+        #   - name: sku
+        #     data_tests:
+        #       - unique
+        #       - not_null
+        #   - name: category_id
+        #     data_tests:
+        #       - not_null
+        #       - relationships:
+        #           to: source('retail_stg', 'categories')
+        #           field: category_id
+        #   - name: price
+        #     data_tests:
+        #       - dbt_utils.accepted_range:
+        #           min_value: 0
+        #   - name: stock_quantity
+        #     data_tests:
+        #       - dbt_utils.accepted_range:
+        #           min_value: 0
+        #           max_value: 1000
+        #   - name: is_active
+        #     data_tests:
+        #       - dbt_utils.at_least_one
+
+      - name: stores
+      #   identifier: STORES
+      #   description: "Physical store locations"
+      #   columns:
+      #     - name: store_id
+      #       description: "Primary key"
+      #       data_tests:
+      #         - unique
+      #         - not_null
+      #     - name: manager_name
+      #       data_tests:
+      #         - dbt_utils.not_null_proportion:
+      #             at_least: 0.9
+
+      - name: orders
+      #   identifier: ORDERS
+      #   description: "Customer orders header"
+      #   loaded_at_field: UPDATED_AT
+      #   config:
+      #     freshness:
+      #       warn_after: {count: 2, period: day}
+      #       error_after: {count: 7, period: day}
+      #   columns:
+      #     - name: order_id
+      #       description: "Primary key"
+      #       data_tests:
+      #         - unique
+      #         - not_null
+      #     - name: customer_id
+      #       data_tests:
+      #         - not_null
+      #         - relationships:
+      #             to: source('retail_stg', 'customers')
+      #             field: customer_id
+      #     - name: store_id
+      #       data_tests:
+      #         - not_null
+      #         - relationships:
+      #             to: source('retail_stg', 'stores')
+      #             field: store_id
+      #     - name: order_date
+      #       data_tests:
+      #         - dbt_utils.recency:
+      #             datepart: day
+      #             interval: 1
+      #     - name: order_status
+      #       data_tests:
+      #         - accepted_values:
+      #             values: ['PENDING', 'SHIPPED', 'DELIVERED', 'CANCELLED']
+      #     - name: payment_status
+      #       data_tests:
+      #         - accepted_values:
+      #             values: ['UNPAID', 'PAID', 'REFUNDED']
+      #     - name: total_amount
+      #       data_tests:
+      #         - dbt_utils.accepted_range:
+      #             min_value: 0
+      #             inclusive: false
+
+      - name: order_items
+        # identifier: ORDER_ITEMS
+        # description: "Line items of each order"
+        # data_tests:
+        #   - dbt_utils.unique_combination_of_columns:
+        #       combination_of_columns:
+        #         - order_id
+        #         - product_id
+        #   - dbt_utils.expression_is_true:
+        #       expression: "line_total = quantity * unit_price"
+        # columns:
+        #   - name: order_item_id
+        #     description: "Primary key"
+        #     data_tests:
+        #       - unique
+        #       - not_null
+        #       - dbt_utils.sequential_values:
+        #           interval: 1
+        #   - name: order_id
+        #     data_tests:
+        #       - not_null
+        #       - relationships:
+        #           to: source('retail_stg', 'orders')
+        #           field: order_id
+        #   - name: product_id
+        #     data_tests:
+        #       - not_null
+        #       - relationships:
+        #           to: source('retail_stg', 'products')
+        #           field: product_id
+        #   - name: quantity
+        #     data_tests:
+        #       - dbt_utils.accepted_range:
+        #           min_value: 1
+        #           max_value: 10
