@@ -1,1 +1,0 @@
-select * from {{ source('retail_stg','products') }} where product_name ilike 'o%'
