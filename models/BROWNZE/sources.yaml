@@ -154,7 +154,7 @@ sources:
           - name: order_status
             data_tests:
               - accepted_values:
-                  arguments: 
+                  arguments:
                     values:
                       - PENDING
                       - SHIPPED
@@ -164,7 +164,7 @@ sources:
           - name: payment_status
             data_tests:
               - accepted_values:
-                  arguments: 
+                  arguments:
                     values:
                       - UNPAID
                       - PAID
@@ -224,3 +224,4 @@ sources:
                   arguments:
                     min_value: 1
                     max_value: 10
+ 
