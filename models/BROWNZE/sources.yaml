@@ -3,7 +3,7 @@ version: 2
 sources:
   - name: retail_stg
     description: "Staging layer of the retail analytics database in Snowflake"
-    database: retail_analytics_db
+    database: "{{ target.database }}"
     schema: STG
 
     tables:
