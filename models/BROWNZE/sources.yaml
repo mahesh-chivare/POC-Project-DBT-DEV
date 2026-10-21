@@ -154,19 +154,21 @@ sources:
           - name: order_status
             data_tests:
               - accepted_values:
-                  values:
-                    - PENDING
-                    - SHIPPED
-                    - DELIVERED
-                    - CANCELLED
+                  arguments: 
+                    values:
+                      - PENDING
+                      - SHIPPED
+                      - DELIVERED
+                      - CANCELLED
 
           - name: payment_status
             data_tests:
               - accepted_values:
-                  values:
-                    - UNPAID
-                    - PAID
-                    - REFUNDED
+                  arguments: 
+                    values:
+                      - UNPAID
+                      - PAID
+                      - REFUNDED
 
           - name: total_amount
             data_tests:
