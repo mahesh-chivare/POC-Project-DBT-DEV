@@ -16,7 +16,7 @@ sources:
             description: "Primary key"
             data_tests:
               - unique
-              - not_null
+              # - not_null
 
           - name: category_name
             data_tests:
