@@ -4,6 +4,6 @@ SELECT
 FROM information_schema.views
 WHERE NOT REGEXP_LIKE(
     table_name,
-    '^VW_[A-Z0-9_]*$'
+    '^[A-Z0-9_$]+$'
     
 )
