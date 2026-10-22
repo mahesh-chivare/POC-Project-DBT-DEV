@@ -1,0 +1,1 @@
+select * from RETAIL_ANALYTICS_ACC.STG.customers

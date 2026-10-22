@@ -7,5 +7,6 @@ WHERE schema_name NOT IN
     'SILVER',
     'GOLD',
     'PUBLIC',
-    'INFORMATION_SCHEMA'
+    'INFORMATION_SCHEMA',
+    'BROWNZE_STG'
 )
