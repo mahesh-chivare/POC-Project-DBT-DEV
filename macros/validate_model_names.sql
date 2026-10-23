@@ -6,7 +6,7 @@
 
         {% set model_name = node.name %}
 
-        {% if not modules.re.match('^[A-Z_]*$', model_name) %}
+        {% if not modules.re.match('^[a-z_]*$', model_name) %}
 
             {% do exceptions.raise_compiler_error(
                 "Naming convention violation: " ~ model_name ~
